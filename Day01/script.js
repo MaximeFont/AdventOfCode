@@ -36,7 +36,6 @@ function extractNumber(line) {
     if (ret == -1)
         ret = 0;
 
-    console.log("-------", ret);
     return (ret);
 }
 
@@ -57,13 +56,14 @@ function findingNumber(line, writedNumbers) {
 
     for (numero of writedNumbers) {
         for (number of numero) {
-            if (line.indexOf(number) != -1) {
-                tmp.push([line.indexOf(number), numero[1]]);
+            for (char in line) {
+                if (line.indexOf(number, char) != -1) {
+                    tmp.push([line.indexOf(number, char), numero[1]]);
+                }
             }
         }
     }
-
-    return (tmp); // fonction valide
+    return (tmp);
 }
 
 function findingFirstDigit(numbers) {
@@ -167,10 +167,7 @@ async function mainP2() {
         let input = await getInput();
         const lines = input.split('\r\n');
         const numbers = getAnyNumbers(lines);
-        
-        for (elem of numbers)
-            console.log(elem);
-        
+
         const sumNumbers = addNumbers(numbers);
         console.log("resultat puzzle 2: ", sumNumbers);
     }
@@ -193,5 +190,5 @@ async function mainP1() {
     }
 }
 
-// mainP1();
+mainP1();
 mainP2();
